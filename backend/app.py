@@ -19,6 +19,9 @@ def create_app(config_name=None):
     cors.init_app(app)
     socketio.init_app(app, cors_allowed_origins="*", async_mode='eventlet')
 
+    # Import models so Alembic can detect them
+    import models  # noqa: F401
+
     # Register blueprints
     from api import register_blueprints
     register_blueprints(app)
