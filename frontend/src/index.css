@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@theme {
+  /* Papaya Brand Colors */
+  --color-papaya-50: #FFF5EB;
+  --color-papaya-100: #FFE8D1;
+  --color-papaya-200: #FFD0A3;
+  --color-papaya-300: #FFB875;
+  --color-papaya-400: #FFA047;
+  --color-papaya-500: #FF8C42;
+  --color-papaya-600: #E67A35;
+  --color-papaya-700: #CC6828;
+  --color-papaya-800: #99501E;
+  --color-papaya-900: #663814;
+
+  /* Neutral Warm */
+  --color-warm-50: #FDFCFB;
+  --color-warm-100: #F7F5F3;
+  --color-warm-200: #EDE9E5;
+  --color-warm-300: #D5CFC9;
+  --color-warm-400: #B8AFA6;
+  --color-warm-500: #9A8F83;
+  --color-warm-600: #7D7268;
+  --color-warm-700: #5F564E;
+  --color-warm-800: #423B35;
+  --color-warm-900: #24211D;
+
+  /* Semantic Colors */
+  --color-success-500: #22C55E;
+  --color-warning-500: #F59E0B;
+  --color-error-500: #EF4444;
+  --color-info-500: #3B82F6;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Border Radius */
+  --radius-DEFAULT: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+}
+
+/* Base styles */
+body {
+  @apply font-sans text-warm-900 bg-warm-50 antialiased;
+}
