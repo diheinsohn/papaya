@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './contexts/AuthContext'
+import { ChatProvider } from './contexts/ChatContext'
 import Header from './components/layout/Header'
 import LandingPage from './pages/landing/LandingPage'
 import LoginPage from './pages/auth/LoginPage'
@@ -13,29 +14,35 @@ import ListingDetailPage from './pages/listings/ListingDetailPage'
 import EditListingPage from './pages/listings/EditListingPage'
 import MyListingsPage from './pages/listings/MyListingsPage'
 import SearchResultsPage from './pages/search/SearchResultsPage'
+import InboxPage from './pages/chat/InboxPage'
+import ConversationPage from './pages/chat/ConversationPage'
 import NotFoundPage from './pages/NotFoundPage'
 import ProtectedRoute from './components/common/ProtectedRoute'
 
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<><Header /><LandingPage /></>} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/home" element={<><Header /><HomePage /></>} />
-          <Route path="/search" element={<><Header /><SearchResultsPage /></>} />
-          <Route path="/listings/:id" element={<><Header /><ListingDetailPage /></>} />
-          <Route path="/create-listing" element={<ProtectedRoute><Header /><CreateListingPage /></ProtectedRoute>} />
-          <Route path="/listings/:id/edit" element={<ProtectedRoute><Header /><EditListingPage /></ProtectedRoute>} />
-          <Route path="/my-listings" element={<ProtectedRoute><Header /><MyListingsPage /></ProtectedRoute>} />
-          <Route path="/users/:id" element={<><Header /><ProfilePage /></>} />
-          <Route path="/settings" element={<ProtectedRoute><Header /><SettingsPage /></ProtectedRoute>} />
-          <Route path="*" element={<><Header /><NotFoundPage /></>} />
-        </Routes>
-      </BrowserRouter>
+      <ChatProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<><Header /><LandingPage /></>} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+            <Route path="/home" element={<><Header /><HomePage /></>} />
+            <Route path="/search" element={<><Header /><SearchResultsPage /></>} />
+            <Route path="/listings/:id" element={<><Header /><ListingDetailPage /></>} />
+            <Route path="/create-listing" element={<ProtectedRoute><Header /><CreateListingPage /></ProtectedRoute>} />
+            <Route path="/listings/:id/edit" element={<ProtectedRoute><Header /><EditListingPage /></ProtectedRoute>} />
+            <Route path="/my-listings" element={<ProtectedRoute><Header /><MyListingsPage /></ProtectedRoute>} />
+            <Route path="/messages" element={<ProtectedRoute><Header /><InboxPage /></ProtectedRoute>} />
+            <Route path="/messages/:conversationId" element={<ProtectedRoute><Header /><ConversationPage /></ProtectedRoute>} />
+            <Route path="/users/:id" element={<><Header /><ProfilePage /></>} />
+            <Route path="/settings" element={<ProtectedRoute><Header /><SettingsPage /></ProtectedRoute>} />
+            <Route path="*" element={<><Header /><NotFoundPage /></>} />
+          </Routes>
+        </BrowserRouter>
+      </ChatProvider>
     </AuthProvider>
   )
 }

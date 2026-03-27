@@ -26,6 +26,10 @@ def create_app(config_name=None):
     from api import register_blueprints
     register_blueprints(app)
 
+    # Register Socket.IO event handlers
+    from sockets import register_socket_handlers
+    register_socket_handlers(socketio)
+
     # Register error handlers
     register_error_handlers(app)
 

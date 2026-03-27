@@ -1,19 +1,24 @@
 import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import type { Listing } from '../../types/listing'
 import { listingsApi } from '../../api/listings'
+import { chatApi } from '../../api/chat'
+import { useAuth } from '../../contexts/AuthContext'
 import ConditionBadge from '../../components/listings/ConditionBadge'
 import PriceDisplay from '../../components/listings/PriceDisplay'
 import Button from '../../components/ui/Button'
 
 export default function ListingDetailPage() {
   const { id } = useParams<{ id: string }>()
+  const { user, isAuthenticated } = useAuth()
+  const navigate = useNavigate()
   const [listing, setListing] = useState<Listing | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [selectedImage, setSelectedImage] = useState(0)
   const [isFavorited, setIsFavorited] = useState(false)
   const [favoriteLoading, setFavoriteLoading] = useState(false)
+  const [contactLoading, setContactLoading] = useState(false)
 
   useEffect(() => {
     if (!id) return
@@ -137,7 +142,29 @@ export default function ListingDetailPage() {
 
           {/* Actions */}
           <div className="mt-6 flex gap-3">
-            <Button className="flex-1">Contactar</Button>
+            {isAuthenticated && user?.id === listing.seller.id ? (
+              <p className="flex-1 text-center text-warm-500 py-2.5">Este es tu artículo</p>
+            ) : (
+              <Button
+                className="flex-1"
+                loading={contactLoading}
+                onClick={async () => {
+                  if (!isAuthenticated) {
+                    navigate('/login', { state: { from: `/listings/${id}` } })
+                    return
+                  }
+                  setContactLoading(true)
+                  try {
+                    const { data } = await chatApi.createConversation(listing.id)
+                    navigate(`/messages/${data.id}`)
+                  } catch {
+                    setContactLoading(false)
+                  }
+                }}
+              >
+                Contactar
+              </Button>
+            )}
             <button
               onClick={handleFavorite}
               disabled={favoriteLoading}

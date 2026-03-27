@@ -1,11 +1,13 @@
 import { useState, useRef, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
+import { useChatContext } from '../../contexts/ChatContext'
 import Button from '../ui/Button'
 import SearchBar from '../search/SearchBar'
 
 export default function Header() {
   const { user, isAuthenticated, logout } = useAuth()
+  const { unreadCount } = useChatContext()
   const navigate = useNavigate()
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -47,9 +49,21 @@ export default function Header() {
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-3">
             {isAuthenticated && (
-              <Link to="/create-listing">
-                <Button size="sm">Publicar</Button>
-              </Link>
+              <>
+                <Link to="/messages" className="relative p-2 text-warm-500 hover:text-papaya-500 transition-colors">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                  </svg>
+                  {unreadCount > 0 && (
+                    <span className="absolute -top-0.5 -right-0.5 min-w-4 h-4 flex items-center justify-center bg-error-500 text-white text-xs font-bold rounded-full px-1">
+                      {unreadCount > 99 ? '99+' : unreadCount}
+                    </span>
+                  )}
+                </Link>
+                <Link to="/create-listing">
+                  <Button size="sm">Publicar</Button>
+                </Link>
+              </>
             )}
             {isAuthenticated ? (
               <div className="relative" ref={dropdownRef}>
@@ -172,6 +186,18 @@ export default function Header() {
                   className="block py-2 text-warm-700"
                 >
                   Mi perfil
+                </Link>
+                <Link
+                  to="/messages"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center justify-between py-2 text-warm-700"
+                >
+                  <span>Mensajes</span>
+                  {unreadCount > 0 && (
+                    <span className="min-w-5 h-5 flex items-center justify-center bg-error-500 text-white text-xs font-bold rounded-full px-1.5">
+                      {unreadCount > 99 ? '99+' : unreadCount}
+                    </span>
+                  )}
                 </Link>
                 <Link
                   to="/create-listing"

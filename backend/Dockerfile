@@ -7,9 +7,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-ENV FLASK_APP=wsgi:app
-
-CMD ["flask", "run", "--host=0.0.0.0", "--port=5000", "--reload"]
+CMD ["python", "wsgi.py"]
 
 FROM dev AS prod
 
