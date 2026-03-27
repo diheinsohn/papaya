@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../contexts/AuthContext'
 import Button from '../ui/Button'
+import SearchBar from '../search/SearchBar'
 
 export default function Header() {
   const { user, isAuthenticated, logout } = useAuth()
@@ -38,11 +39,9 @@ export default function Header() {
             <span className="text-2xl font-bold text-papaya-500">Papaya</span>
           </Link>
 
-          {/* Search placeholder - desktop */}
+          {/* Search - desktop */}
           <div className="hidden md:flex flex-1 max-w-lg mx-8">
-            <div className="w-full h-10 rounded-lg bg-warm-100 border border-warm-200 flex items-center px-4 text-warm-400 text-sm">
-              Buscar productos...
-            </div>
+            <SearchBar className="w-full" />
           </div>
 
           {/* Desktop nav */}
@@ -139,9 +138,7 @@ export default function Header() {
         {/* Mobile search */}
         {mobileMenuOpen && (
           <div className="md:hidden pb-2">
-            <div className="w-full h-10 rounded-lg bg-warm-100 border border-warm-200 flex items-center px-4 text-warm-400 text-sm">
-              Buscar productos...
-            </div>
+            <SearchBar className="w-full" />
           </div>
         )}
       </div>

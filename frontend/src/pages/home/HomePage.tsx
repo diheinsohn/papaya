@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import type { Listing, Category } from '../../types/listing'
-import { listingsApi, categoriesApi } from '../../api/listings'
+import { categoriesApi } from '../../api/listings'
+import { searchApi } from '../../api/search'
 import ListingGrid from '../../components/listings/ListingGrid'
 import CategoryPills from '../../components/listings/CategoryPills'
+import LocationPicker, { getStoredLocation } from '../../components/search/LocationPicker'
 
 type SortOption = 'newest' | 'price_asc' | 'price_desc'
 
@@ -20,6 +22,7 @@ export default function HomePage() {
   const [totalPages, setTotalPages] = useState(1)
   const [sort, setSort] = useState<SortOption>('newest')
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+  const [location, setLocation] = useState<{ lat: number; lng: number } | null>(null)
 
   useEffect(() => {
     categoriesApi.getAll()
@@ -27,45 +30,71 @@ export default function HomePage() {
       .catch(() => {})
   }, [])
 
-  const fetchListings = (p: number, sortBy: string) => {
+  // Initialize location from localStorage
+  useEffect(() => {
+    const stored = getStoredLocation()
+    if (stored) {
+      setLocation({ lat: stored.lat, lng: stored.lng })
+    }
+  }, [])
+
+  const fetchListings = useCallback((p: number) => {
     setLoading(true)
-    listingsApi.getAll({ page: p, per_page: 24, sort: sortBy })
+    const params: Record<string, unknown> = {
+      page: p,
+      per_page: 24,
+      sort_by: sort,
+    }
+    if (location) {
+      params.lat = location.lat
+      params.lng = location.lng
+    }
+    if (selectedCategory) {
+      params.category = selectedCategory
+    }
+    searchApi.search(params)
       .then(({ data }) => {
-        setListings(data.items)
+        if (p === 1) {
+          setListings(data.items)
+        } else {
+          setListings((prev) => [...prev, ...data.items])
+        }
         setTotalPages(data.pages)
         setPage(data.page)
       })
       .catch(() => {})
       .finally(() => setLoading(false))
-  }
+  }, [location, sort, selectedCategory])
 
   useEffect(() => {
-    fetchListings(1, sort)
-  }, [sort])
+    fetchListings(1)
+  }, [fetchListings, sort])
 
   const handleCategorySelect = (slug: string | null) => {
     setSelectedCategory(slug)
+    setPage(1)
+  }
+
+  const handleLocationChange = (lat?: number, lng?: number) => {
+    if (lat != null && lng != null) {
+      setLocation({ lat, lng })
+    } else {
+      setLocation(null)
+    }
   }
 
   const handleLoadMore = () => {
     if (page >= totalPages) return
-    const nextPage = page + 1
-    listingsApi.getAll({ page: nextPage, per_page: 24, sort })
-      .then(({ data }) => {
-        setListings((prev) => [...prev, ...data.items])
-        setTotalPages(data.pages)
-        setPage(data.page)
-      })
-      .catch(() => {})
+    fetchListings(page + 1)
   }
-
-  // Client-side category filter
-  const filteredListings = selectedCategory
-    ? listings.filter((l) => l.category?.slug === selectedCategory)
-    : listings
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
+      {/* Location */}
+      <div className="mb-4">
+        <LocationPicker onLocationChange={handleLocationChange} />
+      </div>
+
       {/* Categories */}
       {categories.length > 0 && (
         <div className="mb-6">
@@ -91,7 +120,7 @@ export default function HomePage() {
         </select>
       </div>
 
-      <ListingGrid listings={filteredListings} loading={loading} />
+      <ListingGrid listings={listings} loading={loading} />
 
       {/* Load more */}
       {page < totalPages && !loading && (

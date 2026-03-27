@@ -12,6 +12,7 @@ import CreateListingPage from './pages/listings/CreateListingPage'
 import ListingDetailPage from './pages/listings/ListingDetailPage'
 import EditListingPage from './pages/listings/EditListingPage'
 import MyListingsPage from './pages/listings/MyListingsPage'
+import SearchResultsPage from './pages/search/SearchResultsPage'
 import ProtectedRoute from './components/common/ProtectedRoute'
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/home" element={<><Header /><HomePage /></>} />
+          <Route path="/search" element={<><Header /><SearchResultsPage /></>} />
           <Route path="/listings/:id" element={<><Header /><ListingDetailPage /></>} />
           <Route path="/create-listing" element={<ProtectedRoute><Header /><CreateListingPage /></ProtectedRoute>} />
           <Route path="/listings/:id/edit" element={<ProtectedRoute><Header /><EditListingPage /></ProtectedRoute>} />
