@@ -10,6 +10,8 @@ export interface User {
   location_lat?: number
   location_lng?: number
   is_verified?: boolean
+  avg_rating?: number
+  review_count?: number
   created_at?: string
   updated_at?: string
 }

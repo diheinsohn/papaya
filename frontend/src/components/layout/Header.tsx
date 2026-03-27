@@ -104,6 +104,20 @@ export default function Header() {
                       Mis artículos
                     </Link>
                     <Link
+                      to="/my-purchases"
+                      onClick={() => setDropdownOpen(false)}
+                      className="block px-4 py-2 text-sm text-warm-700 hover:bg-warm-50"
+                    >
+                      Mis compras
+                    </Link>
+                    <Link
+                      to="/my-sales"
+                      onClick={() => setDropdownOpen(false)}
+                      className="block px-4 py-2 text-sm text-warm-700 hover:bg-warm-50"
+                    >
+                      Mis ventas
+                    </Link>
+                    <Link
                       to="/settings"
                       onClick={() => setDropdownOpen(false)}
                       className="block px-4 py-2 text-sm text-warm-700 hover:bg-warm-50"
@@ -212,6 +226,20 @@ export default function Header() {
                   className="block py-2 text-warm-700"
                 >
                   Mis artículos
+                </Link>
+                <Link
+                  to="/my-purchases"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 text-warm-700"
+                >
+                  Mis compras
+                </Link>
+                <Link
+                  to="/my-sales"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 text-warm-700"
+                >
+                  Mis ventas
                 </Link>
                 <Link
                   to="/settings"

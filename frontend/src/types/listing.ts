@@ -18,6 +18,8 @@ export interface SellerSummary {
   username: string
   display_name?: string
   avatar_url?: string
+  avg_rating?: number
+  review_count?: number
 }
 
 export interface Listing {

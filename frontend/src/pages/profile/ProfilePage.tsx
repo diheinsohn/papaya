@@ -5,6 +5,8 @@ import { listingsApi } from '../../api/listings'
 import type { User } from '../../types/user'
 import type { Listing } from '../../types/listing'
 import ListingGrid from '../../components/listings/ListingGrid'
+import UserReputation from '../../components/reviews/UserReputation'
+import ReviewList from '../../components/reviews/ReviewList'
 
 export default function ProfilePage() {
   const { id } = useParams<{ id: string }>()
@@ -90,6 +92,9 @@ export default function ProfilePage() {
               {user.display_name || user.username}
             </h1>
             <p className="text-warm-500">@{user.username}</p>
+            <div className="mt-1">
+              <UserReputation avgRating={user.avg_rating} reviewCount={user.review_count} />
+            </div>
             {user.location_name && (
               <p className="text-sm text-warm-500 mt-1">{user.location_name}</p>
             )}
@@ -125,7 +130,7 @@ export default function ProfilePage() {
 
           <div>
             <h2 className="text-sm font-semibold text-warm-700 mb-3">Reseñas</h2>
-            <p className="text-warm-400 text-sm">Sin reseñas aún.</p>
+            <ReviewList userId={id!} />
           </div>
         </div>
       </div>

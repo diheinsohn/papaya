@@ -32,6 +32,8 @@ class UserPublicSchema(ma.Schema):
     avatar_url = fields.String()
     bio = fields.String()
     location_name = fields.String()
+    avg_rating = fields.Float()
+    review_count = fields.Integer()
     is_verified = fields.Boolean()
     created_at = fields.DateTime()
 

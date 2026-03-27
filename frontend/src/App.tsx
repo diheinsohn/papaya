@@ -16,6 +16,9 @@ import MyListingsPage from './pages/listings/MyListingsPage'
 import SearchResultsPage from './pages/search/SearchResultsPage'
 import InboxPage from './pages/chat/InboxPage'
 import ConversationPage from './pages/chat/ConversationPage'
+import WriteReviewPage from './pages/reviews/WriteReviewPage'
+import MyPurchasesPage from './pages/transactions/MyPurchasesPage'
+import MySalesPage from './pages/transactions/MySalesPage'
 import NotFoundPage from './pages/NotFoundPage'
 import ProtectedRoute from './components/common/ProtectedRoute'
 
@@ -37,6 +40,9 @@ function App() {
             <Route path="/my-listings" element={<ProtectedRoute><Header /><MyListingsPage /></ProtectedRoute>} />
             <Route path="/messages" element={<ProtectedRoute><Header /><InboxPage /></ProtectedRoute>} />
             <Route path="/messages/:conversationId" element={<ProtectedRoute><Header /><ConversationPage /></ProtectedRoute>} />
+            <Route path="/my-purchases" element={<ProtectedRoute><Header /><MyPurchasesPage /></ProtectedRoute>} />
+            <Route path="/my-sales" element={<ProtectedRoute><Header /><MySalesPage /></ProtectedRoute>} />
+            <Route path="/reviews/write/:listingId" element={<ProtectedRoute><Header /><WriteReviewPage /></ProtectedRoute>} />
             <Route path="/users/:id" element={<><Header /><ProfilePage /></>} />
             <Route path="/settings" element={<ProtectedRoute><Header /><SettingsPage /></ProtectedRoute>} />
             <Route path="*" element={<><Header /><NotFoundPage /></>} />

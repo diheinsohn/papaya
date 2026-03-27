@@ -142,21 +142,23 @@ export default function ConversationPage() {
           </Link>
 
           <div className="min-w-0 flex-1">
-            <Link
-              to={`/listings/${conversation.listing.id}`}
-              className="text-sm font-medium text-warm-800 truncate block hover:text-papaya-500"
-            >
-              {conversation.listing.title}
-            </Link>
-            <div className="flex items-center gap-2 text-xs text-warm-500">
-              <span className="font-medium text-papaya-600">${parseInt(conversation.listing.price).toLocaleString('es-CL')}</span>
-              <span>·</span>
+            <div className="flex items-center gap-2">
               <Link
                 to={`/users/${conversation.other_user.id}`}
-                className="hover:text-papaya-500"
+                className="text-sm font-semibold text-warm-800 hover:text-papaya-500 truncate"
               >
                 {conversation.other_user.display_name || conversation.other_user.username}
               </Link>
+            </div>
+            <div className="flex items-center gap-2 text-xs text-warm-500">
+              <Link
+                to={`/listings/${conversation.listing.id}`}
+                className="truncate hover:text-papaya-500"
+              >
+                {conversation.listing.title}
+              </Link>
+              <span>·</span>
+              <span className="font-medium text-papaya-600 shrink-0">${parseInt(conversation.listing.price).toLocaleString('es-CL')}</span>
             </div>
           </div>
 

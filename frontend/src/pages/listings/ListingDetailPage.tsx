@@ -3,10 +3,12 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import type { Listing } from '../../types/listing'
 import { listingsApi } from '../../api/listings'
 import { chatApi } from '../../api/chat'
+import { reviewsApi } from '../../api/reviews'
 import { useAuth } from '../../contexts/AuthContext'
 import ConditionBadge from '../../components/listings/ConditionBadge'
 import PriceDisplay from '../../components/listings/PriceDisplay'
 import Button from '../../components/ui/Button'
+import UserReputation from '../../components/reviews/UserReputation'
 
 export default function ListingDetailPage() {
   const { id } = useParams<{ id: string }>()
@@ -19,6 +21,7 @@ export default function ListingDetailPage() {
   const [isFavorited, setIsFavorited] = useState(false)
   const [favoriteLoading, setFavoriteLoading] = useState(false)
   const [contactLoading, setContactLoading] = useState(false)
+  const [canReview, setCanReview] = useState(false)
 
   useEffect(() => {
     if (!id) return
@@ -30,7 +33,13 @@ export default function ListingDetailPage() {
       })
       .catch(() => setError('No se pudo cargar la publicación.'))
       .finally(() => setLoading(false))
-  }, [id])
+
+    if (isAuthenticated) {
+      reviewsApi.canReview(id)
+        .then(({ data }) => setCanReview(data.can_review))
+        .catch(() => {})
+    }
+  }, [id, isAuthenticated])
 
   const handleFavorite = async () => {
     if (!listing || favoriteLoading) return
@@ -206,8 +215,20 @@ export default function ListingDetailPage() {
                 {listing.seller.display_name || listing.seller.username}
               </p>
               <p className="text-sm text-warm-500">@{listing.seller.username}</p>
+              <div className="mt-0.5">
+                <UserReputation avgRating={listing.seller.avg_rating} reviewCount={listing.seller.review_count} />
+              </div>
             </div>
           </Link>
+
+          {canReview && (
+            <Link
+              to={`/reviews/write/${listing.id}`}
+              className="mt-3 block text-center px-4 py-2 text-sm font-medium rounded-lg border-2 border-papaya-500 text-papaya-500 hover:bg-papaya-50 transition-colors"
+            >
+              Dejar reseña
+            </Link>
+          )}
 
           <p className="mt-4 text-xs text-warm-400">
             Publicado el {new Date(listing.created_at).toLocaleDateString('es-AR')}
