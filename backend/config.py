@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 
 
 class Config:
@@ -8,8 +9,9 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     JWT_TOKEN_LOCATION = ['headers', 'cookies']
     JWT_COOKIE_SECURE = False  # Set True in production
-    JWT_ACCESS_TOKEN_EXPIRES = 900  # 15 minutes
-    JWT_REFRESH_TOKEN_EXPIRES = 2592000  # 30 days
+    JWT_COOKIE_CSRF_PROTECT = False  # Simplify for now
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=15)
+    JWT_REFRESH_TOKEN_EXPIRES = timedelta(days=30)
     UPLOAD_DIR = os.environ.get('UPLOAD_DIR', 'uploads')
     STORAGE_BACKEND = os.environ.get('STORAGE_BACKEND', 'local')
     REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')

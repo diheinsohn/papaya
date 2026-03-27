@@ -52,18 +52,11 @@ def get_metadata():
 
 
 def include_object(object, name, type_, reflected, compare_to):
-    """Exclude PostGIS/Tiger internal tables and schemas from autogenerate."""
-    if type_ == "table" and name in (
-        'spatial_ref_sys', 'geometry_columns', 'geography_columns',
-        'raster_columns', 'raster_overviews',
-    ):
-        return False
-    if type_ == "table" and object.schema in ('tiger', 'tiger_data', 'topology'):
-        return False
-    # Exclude any table not in the default (public) schema that we don't own
+    """Only include tables that belong to our app (whitelist approach).
+    This excludes all PostGIS/Tiger/topology tables that come with the postgis image."""
     if type_ == "table" and reflected and compare_to is None:
-        if object.schema and object.schema != 'public':
-            return False
+        # This is a table in the DB that is NOT in our models — exclude it
+        return False
     return True
 
 

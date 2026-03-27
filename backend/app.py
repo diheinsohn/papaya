@@ -33,6 +33,15 @@ def create_app(config_name=None):
 
 
 def register_error_handlers(app):
+    from utils.errors import AppError, ValidationError
+
+    @app.errorhandler(AppError)
+    def handle_app_error(error):
+        response = {'error': error.__class__.__name__, 'message': error.message}
+        if isinstance(error, ValidationError) and error.errors:
+            response['errors'] = error.errors
+        return response, error.status_code
+
     @app.errorhandler(404)
     def not_found(error):
         return {'error': 'not_found', 'message': 'Resource not found'}, 404
