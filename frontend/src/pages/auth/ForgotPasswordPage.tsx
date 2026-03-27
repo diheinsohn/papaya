@@ -19,28 +19,33 @@ export default function ForgotPasswordPage() {
       await authApi.forgotPassword(email)
       setSubmitted(true)
     } catch {
-      setError('Ocurrio un error. Intenta de nuevo.')
+      setError('Ocurrió un error. Intenta de nuevo.')
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-warm-50">
       <div className="w-full max-w-md">
+        <div className="text-center mb-8">
+          <Link to="/" className="inline-block">
+            <img src="/logo.svg" alt="Papaya" className="h-10 mx-auto" />
+          </Link>
+        </div>
         <div className="bg-white rounded-xl shadow-md border border-warm-200 p-8">
-          <h1 className="text-2xl font-bold text-warm-900 text-center mb-2">Recuperar contrasena</h1>
+          <h1 className="text-2xl font-bold text-warm-900 text-center mb-2">Recuperar contraseña</h1>
           <p className="text-sm text-warm-500 text-center mb-6">
-            Ingresa tu correo y te enviaremos un enlace para restablecer tu contrasena.
+            Ingresa tu correo y te enviaremos un enlace para restablecer tu contraseña.
           </p>
 
           {submitted ? (
             <div className="text-center">
               <div className="mb-4 p-4 rounded-lg bg-success-500/10 text-success-500 text-sm">
-                Si el correo existe en nuestro sistema, recibiras un enlace para restablecer tu contrasena.
+                Si el correo existe en nuestro sistema, recibirás un enlace para restablecer tu contraseña.
               </div>
               <Link to="/login" className="text-papaya-500 hover:text-papaya-600 font-medium text-sm">
-                Volver a iniciar sesion
+                Volver a iniciar sesión
               </Link>
             </div>
           ) : (
@@ -53,7 +58,7 @@ export default function ForgotPasswordPage() {
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <Input
-                  label="Correo electronico"
+                  label="Correo electrónico"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -69,7 +74,7 @@ export default function ForgotPasswordPage() {
 
               <p className="mt-6 text-center text-sm text-warm-600">
                 <Link to="/login" className="text-papaya-500 hover:text-papaya-600 font-medium">
-                  Volver a iniciar sesion
+                  Volver a iniciar sesión
                 </Link>
               </p>
             </>

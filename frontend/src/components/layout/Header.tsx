@@ -36,7 +36,7 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 shrink-0">
-            <span className="text-2xl font-bold text-papaya-500">Papaya</span>
+            <img src="/logo.svg" alt="Papaya" className="h-8" />
           </Link>
 
           {/* Search - desktop */}
@@ -87,21 +87,21 @@ export default function Header() {
                       onClick={() => setDropdownOpen(false)}
                       className="block px-4 py-2 text-sm text-warm-700 hover:bg-warm-50"
                     >
-                      Mis articulos
+                      Mis artículos
                     </Link>
                     <Link
                       to="/settings"
                       onClick={() => setDropdownOpen(false)}
                       className="block px-4 py-2 text-sm text-warm-700 hover:bg-warm-50"
                     >
-                      Configuracion
+                      Configuración
                     </Link>
                     <hr className="my-1 border-warm-200" />
                     <button
                       onClick={handleLogout}
                       className="block w-full text-left px-4 py-2 text-sm text-error-500 hover:bg-warm-50"
                     >
-                      Cerrar sesion
+                      Cerrar sesión
                     </button>
                   </div>
                 )}
@@ -109,7 +109,7 @@ export default function Header() {
             ) : (
               <>
                 <Link to="/login">
-                  <Button variant="outline" size="sm">Iniciar sesion</Button>
+                  <Button variant="outline" size="sm">Iniciar sesión</Button>
                 </Link>
                 <Link to="/register">
                   <Button size="sm">Registrarse</Button>
@@ -185,26 +185,26 @@ export default function Header() {
                   onClick={() => setMobileMenuOpen(false)}
                   className="block py-2 text-warm-700"
                 >
-                  Mis articulos
+                  Mis artículos
                 </Link>
                 <Link
                   to="/settings"
                   onClick={() => setMobileMenuOpen(false)}
                   className="block py-2 text-warm-700"
                 >
-                  Configuracion
+                  Configuración
                 </Link>
                 <button
                   onClick={handleLogout}
                   className="block w-full text-left py-2 text-error-500"
                 >
-                  Cerrar sesion
+                  Cerrar sesión
                 </button>
               </>
             ) : (
               <div className="flex flex-col gap-2">
                 <Link to="/login" onClick={() => setMobileMenuOpen(false)}>
-                  <Button variant="outline" size="sm" className="w-full">Iniciar sesion</Button>
+                  <Button variant="outline" size="sm" className="w-full">Iniciar sesión</Button>
                 </Link>
                 <Link to="/register" onClick={() => setMobileMenuOpen(false)}>
                   <Button size="sm" className="w-full">Registrarse</Button>

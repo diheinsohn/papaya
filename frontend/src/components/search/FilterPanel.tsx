@@ -73,7 +73,7 @@ export default function FilterPanel({ filters, onFilterChange, location }: Filte
     <div className="space-y-6">
       {/* Category */}
       <div>
-        <h3 className="text-sm font-semibold text-warm-800 mb-2">Categoria</h3>
+        <h3 className="text-sm font-semibold text-warm-800 mb-2">Categoría</h3>
         <div className="space-y-1">
           <button
             onClick={() => onFilterChange.setCategory(null)}
@@ -130,7 +130,7 @@ export default function FilterPanel({ filters, onFilterChange, location }: Filte
 
       {/* Condition */}
       <div>
-        <h3 className="text-sm font-semibold text-warm-800 mb-2">Condicion</h3>
+        <h3 className="text-sm font-semibold text-warm-800 mb-2">Condición</h3>
         <div className="space-y-1.5">
           {Object.entries(CONDITION_LABELS).map(([key, label]) => {
             const active = filters.condition?.split(',').includes(key) || false

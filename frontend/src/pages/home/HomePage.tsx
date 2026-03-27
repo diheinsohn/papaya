@@ -9,7 +9,7 @@ import LocationPicker, { getStoredLocation } from '../../components/search/Locat
 type SortOption = 'newest' | 'price_asc' | 'price_desc'
 
 const SORT_OPTIONS: { value: SortOption; label: string }[] = [
-  { value: 'newest', label: 'Mas reciente' },
+  { value: 'newest', label: 'Más reciente' },
   { value: 'price_asc', label: 'Menor precio' },
   { value: 'price_desc', label: 'Mayor precio' },
 ]
@@ -108,7 +108,7 @@ export default function HomePage() {
 
       {/* Sort */}
       <div className="flex items-center justify-between mb-4">
-        <h1 className="text-lg font-semibold text-warm-800">Publicaciones</h1>
+        <h1 className="text-lg font-semibold text-warm-800">Descubre artículos cerca de ti</h1>
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value as SortOption)}
@@ -129,7 +129,7 @@ export default function HomePage() {
             onClick={handleLoadMore}
             className="px-6 py-2.5 rounded-lg border-2 border-papaya-500 text-papaya-500 font-medium hover:bg-papaya-50 transition-colors"
           >
-            Cargar mas
+            Cargar más
           </button>
         </div>
       )}

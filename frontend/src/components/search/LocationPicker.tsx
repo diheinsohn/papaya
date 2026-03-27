@@ -47,7 +47,7 @@ export default function LocationPicker({ onLocationChange }: LocationPickerProps
 
   const requestLocation = () => {
     if (!navigator.geolocation) {
-      setError('Tu navegador no soporta geolocalizacion')
+      setError('Tu navegador no soporta geolocalización')
       return
     }
     setLoading(true)
@@ -69,9 +69,9 @@ export default function LocationPicker({ onLocationChange }: LocationPickerProps
       (err) => {
         setLoading(false)
         if (err.code === err.PERMISSION_DENIED) {
-          setError('Permiso de ubicacion denegado')
+          setError('Permiso de ubicación denegado')
         } else {
-          setError('No se pudo obtener la ubicacion')
+          setError('No se pudo obtener la ubicación')
         }
       },
       { enableHighAccuracy: false, timeout: 10000 },
@@ -101,7 +101,7 @@ export default function LocationPicker({ onLocationChange }: LocationPickerProps
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
-            <span>{location.name || 'Ubicacion actual'}</span>
+            <span>{location.name || 'Ubicación actual'}</span>
           </div>
           <div className="flex items-center gap-1.5">
             {RADIUS_OPTIONS.map((r) => (
@@ -142,7 +142,7 @@ export default function LocationPicker({ onLocationChange }: LocationPickerProps
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
           )}
-          {loading ? 'Obteniendo ubicacion...' : 'Usar mi ubicacion'}
+          {loading ? 'Obteniendo ubicación...' : 'Usar mi ubicación'}
         </button>
       )}
       {error && <span className="text-xs text-error-500">{error}</span>}

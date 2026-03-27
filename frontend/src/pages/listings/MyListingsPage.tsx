@@ -33,7 +33,7 @@ export default function MyListingsPage() {
   }
 
   const handleDelete = async (id: string) => {
-    if (!window.confirm('¿Seguro que quieres eliminar esta publicacion?')) return
+    if (!window.confirm('¿Seguro que quieres eliminar esta publicación?')) return
     try {
       await listingsApi.delete(id)
       setListings((prev) => prev.filter((l) => l.id !== id))
@@ -45,9 +45,9 @@ export default function MyListingsPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-warm-900">Mis publicaciones</h1>
+        <h1 className="text-2xl font-bold text-warm-900">Mis publicaciónes</h1>
         <Link to="/create-listing">
-          <Button size="sm">Crear publicacion</Button>
+          <Button size="sm">Crear publicación</Button>
         </Link>
       </div>
 
@@ -57,7 +57,7 @@ export default function MyListingsPage() {
         showActions
         onEdit={handleEdit}
         onDelete={handleDelete}
-        emptyMessage="Aun no tienes publicaciones. ¡Crea tu primera!"
+        emptyMessage="Aún no tienes publicaciónes. ¡Crea tu primera!"
       />
 
       {/* Pagination */}

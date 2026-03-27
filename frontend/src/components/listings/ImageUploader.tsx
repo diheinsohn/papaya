@@ -38,14 +38,14 @@ export default function ImageUploader({
     setError('')
     const remaining = maxImages - images.length
     if (remaining <= 0) {
-      setError(`Maximo ${maxImages} imagenes permitidas.`)
+      setError(`Máximo ${maxImages} imágenes permitidas.`)
       return []
     }
 
     const valid: File[] = []
     for (const file of files) {
       if (!ACCEPTED_TYPES.includes(file.type)) {
-        setError('Solo se permiten imagenes JPG, PNG o WebP.')
+        setError('Solo se permiten imágenes JPG, PNG o WebP.')
         continue
       }
       if (file.size > maxSizeMB * 1024 * 1024) {
@@ -114,7 +114,7 @@ export default function ImageUploader({
   return (
     <div>
       <p className="text-sm text-warm-600 mb-2">
-        {images.length}/{maxImages} imagenes
+        {images.length}/{maxImages} imágenes
       </p>
 
       {/* Drop zone */}
@@ -133,7 +133,7 @@ export default function ImageUploader({
           <svg className="w-8 h-8 mx-auto text-warm-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
           </svg>
-          <p className="text-sm text-warm-600">Arrastra imagenes o haz clic para seleccionar</p>
+          <p className="text-sm text-warm-600">Arrastra imágenes o haz clic para seleccionar</p>
           <p className="text-xs text-warm-400 mt-1">JPG, PNG o WebP. Max {maxSizeMB}MB cada una.</p>
           <input
             ref={fileInputRef}

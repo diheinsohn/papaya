@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import Button from '../ui/Button'
 
 export default function HeroSection() {
@@ -18,12 +19,16 @@ export default function HeroSection() {
             necesitas cerca de ti, con pagos seguros y de forma sustentable.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button size="lg">
-              Explorar artículos
-            </Button>
-            <Button variant="outline" size="lg">
-              Publicar un artículo
-            </Button>
+            <Link to="/home">
+              <Button size="lg">
+                Explorar artículos
+              </Button>
+            </Link>
+            <Link to="/create-listing">
+              <Button variant="outline" size="lg">
+                Publicar un artículo
+              </Button>
+            </Link>
           </div>
         </div>
       </div>

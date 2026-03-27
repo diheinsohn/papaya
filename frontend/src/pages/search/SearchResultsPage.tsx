@@ -5,10 +5,10 @@ import ListingGrid from '../../components/listings/ListingGrid'
 
 const SORT_OPTIONS = [
   { value: '', label: 'Relevancia' },
-  { value: 'newest', label: 'Mas reciente' },
+  { value: 'newest', label: 'Más reciente' },
   { value: 'price_asc', label: 'Menor precio' },
   { value: 'price_desc', label: 'Mayor precio' },
-  { value: 'distance', label: 'Mas cercano' },
+  { value: 'distance', label: 'Más cercano' },
 ]
 
 export default function SearchResultsPage() {

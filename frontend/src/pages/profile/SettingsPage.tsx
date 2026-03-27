@@ -104,7 +104,7 @@ export default function SettingsPage() {
   return (
     <div className="max-w-2xl mx-auto px-4 py-12">
       <div className="bg-white rounded-xl shadow-md border border-warm-200 p-8">
-        <h1 className="text-2xl font-bold text-warm-900 mb-8">Configuracion</h1>
+        <h1 className="text-2xl font-bold text-warm-900 mb-8">Configuración</h1>
 
         {/* Avatar section */}
         <div className="flex items-center gap-6 mb-8">
@@ -135,7 +135,7 @@ export default function SettingsPage() {
               onChange={handleAvatarChange}
               className="hidden"
             />
-            <p className="text-xs text-warm-400 mt-1">JPG, PNG. Maximo 5 MB.</p>
+            <p className="text-xs text-warm-400 mt-1">JPG, PNG. Máximo 5 MB.</p>
           </div>
         </div>
 
@@ -163,20 +163,20 @@ export default function SettingsPage() {
 
           <div>
             <label htmlFor="bio" className="block text-sm font-medium text-warm-700 mb-1.5">
-              Biografia
+              Biografía
             </label>
             <textarea
               id="bio"
               value={bio}
               onChange={(e) => setBio(e.target.value)}
-              placeholder="Cuentanos sobre ti..."
+              placeholder="Cuéntanos sobre ti..."
               rows={4}
               className="w-full px-4 py-2.5 rounded-lg border border-warm-300 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-1 focus:border-papaya-500 focus:ring-papaya-500/30 placeholder:text-warm-400 resize-none"
             />
           </div>
 
           <Input
-            label="Telefono"
+            label="Teléfono"
             type="tel"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
@@ -184,7 +184,7 @@ export default function SettingsPage() {
           />
 
           <Input
-            label="Ubicacion"
+            label="Ubicación"
             type="text"
             value={locationName}
             onChange={(e) => setLocationName(e.target.value)}

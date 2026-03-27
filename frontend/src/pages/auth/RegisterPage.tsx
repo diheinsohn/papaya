@@ -20,12 +20,12 @@ export default function RegisterPage() {
     setError('')
 
     if (password.length < 8) {
-      setError('La contrasena debe tener al menos 8 caracteres.')
+      setError('La contraseña debe tener al menos 8 caracteres.')
       return
     }
 
     if (!/^[a-zA-Z0-9_]+$/.test(username)) {
-      setError('El nombre de usuario solo puede contener letras, numeros y guiones bajos.')
+      setError('El nombre de usuario solo puede contener letras, números y guiones bajos.')
       return
     }
 
@@ -38,9 +38,9 @@ export default function RegisterPage() {
       if (err instanceof AxiosError && err.response?.data?.message) {
         setError(err.response.data.message)
       } else if (err instanceof AxiosError && err.response?.status === 409) {
-        setError('El correo o nombre de usuario ya esta en uso.')
+        setError('El correo o nombre de usuario ya está en uso.')
       } else {
-        setError('Ocurrio un error. Intenta de nuevo.')
+        setError('Ocurrió un error. Intenta de nuevo.')
       }
     } finally {
       setLoading(false)
@@ -51,7 +51,9 @@ export default function RegisterPage() {
     <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-warm-50">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <Link to="/" className="text-3xl font-bold text-papaya-500">Papaya</Link>
+          <Link to="/" className="inline-block">
+            <img src="/logo.svg" alt="Papaya" className="h-10 mx-auto" />
+          </Link>
         </div>
         <div className="bg-white rounded-xl shadow-md border border-warm-200 p-8">
           <h1 className="text-2xl font-bold text-warm-900 text-center mb-6">Crear cuenta</h1>
@@ -64,7 +66,7 @@ export default function RegisterPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
-              label="Correo electronico"
+              label="Correo electrónico"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -81,18 +83,18 @@ export default function RegisterPage() {
               placeholder="mi_usuario"
               required
               autoComplete="username"
-              helperText="Letras, numeros y guiones bajos"
+              helperText="Letras, números y guiones bajos"
             />
 
             <Input
-              label="Contrasena"
+              label="Contraseña"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Minimo 8 caracteres"
+              placeholder="Mínimo 8 caracteres"
               required
               autoComplete="new-password"
-              helperText="Minimo 8 caracteres"
+              helperText="Mínimo 8 caracteres"
             />
 
             <Button type="submit" loading={loading} className="w-full">
@@ -103,7 +105,7 @@ export default function RegisterPage() {
           <p className="mt-6 text-center text-sm text-warm-600">
             ¿Ya tienes cuenta?{' '}
             <Link to="/login" className="text-papaya-500 hover:text-papaya-600 font-medium">
-              Inicia sesion
+              Inicia sesión
             </Link>
           </p>
         </div>

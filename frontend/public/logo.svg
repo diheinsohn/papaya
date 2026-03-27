@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" fill="none">
+  <!-- Papaya fruit icon -->
+  <g transform="translate(4, 4)">
+    <!-- Outer papaya shape -->
+    <ellipse cx="20" cy="20" rx="18" ry="20" fill="#FF8C42"/>
+    <!-- Inner seed area -->
+    <ellipse cx="20" cy="20" rx="10" ry="14" fill="#FFB380" opacity="0.6"/>
+    <!-- Seeds -->
+    <circle cx="17" cy="14" r="2" fill="#D4602E"/>
+    <circle cx="23" cy="14" r="2" fill="#D4602E"/>
+    <circle cx="15" cy="20" r="2" fill="#D4602E"/>
+    <circle cx="25" cy="20" r="2" fill="#D4602E"/>
+    <circle cx="17" cy="26" r="2" fill="#D4602E"/>
+    <circle cx="23" cy="26" r="2" fill="#D4602E"/>
+    <circle cx="20" cy="17" r="1.5" fill="#D4602E"/>
+    <circle cx="20" cy="23" r="1.5" fill="#D4602E"/>
+    <!-- Leaf/stem -->
+    <path d="M20 0 Q24 -2 26 2 Q24 4 20 4 Q16 4 14 2 Q16 -2 20 0Z" fill="#4CAF50" transform="translate(0, 2)"/>
+  </g>
+  <!-- Text "Papaya" -->
+  <text x="52" y="34" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="30" font-weight="700" fill="#FF8C42">Papaya</text>
+</svg>

@@ -1,11 +1,16 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { usersApi } from '../../api/auth'
+import { listingsApi } from '../../api/listings'
 import type { User } from '../../types/user'
+import type { Listing } from '../../types/listing'
+import ListingGrid from '../../components/listings/ListingGrid'
 
 export default function ProfilePage() {
   const { id } = useParams<{ id: string }>()
   const [user, setUser] = useState<User | null>(null)
+  const [listings, setListings] = useState<Listing[]>([])
+  const [listingsLoading, setListingsLoading] = useState(true)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
@@ -25,6 +30,12 @@ export default function ProfilePage() {
       }
     }
     fetchUser()
+
+    setListingsLoading(true)
+    listingsApi.getUserListings(id, { per_page: 12 })
+      .then(({ data }) => setListings(data.items))
+      .catch(() => {})
+      .finally(() => setListingsLoading(false))
   }, [id])
 
   if (loading) {
@@ -101,20 +112,20 @@ export default function ProfilePage() {
           </div>
         )}
 
-        {/* Placeholder sections */}
+        {/* User listings */}
         <div className="space-y-6">
           <div>
             <h2 className="text-sm font-semibold text-warm-700 mb-3">Publicaciones</h2>
-            <div className="text-center py-8 bg-warm-50 rounded-lg border border-warm-200">
-              <p className="text-warm-400 text-sm">Las publicaciones apareceran aqui proximamente.</p>
-            </div>
+            <ListingGrid
+              listings={listings}
+              loading={listingsLoading}
+              emptyMessage="Este usuario aún no tiene publicaciones."
+            />
           </div>
 
           <div>
-            <h2 className="text-sm font-semibold text-warm-700 mb-3">Resenas</h2>
-            <div className="text-center py-8 bg-warm-50 rounded-lg border border-warm-200">
-              <p className="text-warm-400 text-sm">Las resenas apareceran aqui proximamente.</p>
-            </div>
+            <h2 className="text-sm font-semibold text-warm-700 mb-3">Reseñas</h2>
+            <p className="text-warm-400 text-sm">Sin reseñas aún.</p>
           </div>
         </div>
       </div>

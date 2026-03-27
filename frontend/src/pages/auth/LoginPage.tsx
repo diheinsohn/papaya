@@ -27,9 +27,9 @@ export default function LoginPage() {
       navigate(returnTo, { replace: true })
     } catch (err) {
       if (err instanceof AxiosError && err.response?.status === 401) {
-        setError('Correo o contrasena incorrectos.')
+        setError('Correo o contraseña incorrectos.')
       } else {
-        setError('Ocurrio un error. Intenta de nuevo.')
+        setError('Ocurrió un error. Intenta de nuevo.')
       }
     } finally {
       setLoading(false)
@@ -40,7 +40,9 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center px-4 py-12 bg-warm-50">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <Link to="/" className="text-3xl font-bold text-papaya-500">Papaya</Link>
+          <Link to="/" className="inline-block">
+            <img src="/logo.svg" alt="Papaya" className="h-10 mx-auto" />
+          </Link>
         </div>
         <div className="bg-white rounded-xl shadow-md border border-warm-200 p-8">
           <h1 className="text-2xl font-bold text-warm-900 text-center mb-6">Iniciar sesión</h1>
@@ -53,7 +55,7 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input
-              label="Correo electronico"
+              label="Correo electrónico"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -63,30 +65,30 @@ export default function LoginPage() {
             />
 
             <Input
-              label="Contrasena"
+              label="Contraseña"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Tu contrasena"
+              placeholder="Tu contraseña"
               required
               autoComplete="current-password"
             />
 
             <div className="text-right">
               <Link to="/forgot-password" className="text-sm text-papaya-500 hover:text-papaya-600">
-                ¿Olvidaste tu contrasena?
+                ¿Olvidaste tu contraseña?
               </Link>
             </div>
 
             <Button type="submit" loading={loading} className="w-full">
-              Iniciar sesion
+              Iniciar sesión
             </Button>
           </form>
 
           <p className="mt-6 text-center text-sm text-warm-600">
             ¿No tienes cuenta?{' '}
             <Link to="/register" className="text-papaya-500 hover:text-papaya-600 font-medium">
-              Registrate
+              Regístrate
             </Link>
           </p>
         </div>

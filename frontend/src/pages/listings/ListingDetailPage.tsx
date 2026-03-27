@@ -23,7 +23,7 @@ export default function ListingDetailPage() {
         setListing(data)
         setIsFavorited(data.is_favorited)
       })
-      .catch(() => setError('No se pudo cargar la publicacion.'))
+      .catch(() => setError('No se pudo cargar la publicación.'))
       .finally(() => setLoading(false))
   }, [id])
 
@@ -60,7 +60,7 @@ export default function ListingDetailPage() {
   if (error || !listing) {
     return (
       <div className="max-w-5xl mx-auto px-4 py-16 text-center">
-        <p className="text-warm-500 text-lg">{error || 'Publicacion no encontrada.'}</p>
+        <p className="text-warm-500 text-lg">{error || 'Publicación no encontrada.'}</p>
         <Link to="/home" className="mt-4 inline-block text-papaya-500 hover:text-papaya-600 font-medium">
           Volver al inicio
         </Link>
@@ -131,7 +131,7 @@ export default function ListingDetailPage() {
 
           {/* Description */}
           <div className="mt-6">
-            <h2 className="text-sm font-semibold text-warm-700 mb-2">Descripcion</h2>
+            <h2 className="text-sm font-semibold text-warm-700 mb-2">Descripción</h2>
             <p className="text-warm-700 whitespace-pre-line">{listing.description}</p>
           </div>
 

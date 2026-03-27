@@ -51,7 +51,7 @@ export default function EditListingPage() {
           }))
         setImages(existingImages)
       })
-      .catch(() => setError('No se pudo cargar la publicacion.'))
+      .catch(() => setError('No se pudo cargar la publicación.'))
       .finally(() => setPageLoading(false))
   }, [id])
 
@@ -60,10 +60,10 @@ export default function EditListingPage() {
     if (!id) return
     setError('')
 
-    if (!title.trim()) { setError('Ingresa un titulo.'); return }
-    if (!categoryId) { setError('Selecciona una categoria.'); return }
-    if (!condition) { setError('Selecciona la condicion.'); return }
-    if (!price || Number(price) <= 0) { setError('Ingresa un precio valido.'); return }
+    if (!title.trim()) { setError('Ingresa un título.'); return }
+    if (!categoryId) { setError('Selecciona una categoría.'); return }
+    if (!condition) { setError('Selecciona la condición.'); return }
+    if (!price || Number(price) <= 0) { setError('Ingresa un precio válido.'); return }
 
     setLoading(true)
     try {
@@ -99,7 +99,7 @@ export default function EditListingPage() {
 
       navigate(`/listings/${id}`, { replace: true })
     } catch {
-      setError('Ocurrio un error al actualizar. Intenta de nuevo.')
+      setError('Ocurrió un error al actualizar. Intenta de nuevo.')
     } finally {
       setLoading(false)
     }
@@ -127,7 +127,7 @@ export default function EditListingPage() {
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
-      <h1 className="text-2xl font-bold text-warm-900 mb-6">Editar publicacion</h1>
+      <h1 className="text-2xl font-bold text-warm-900 mb-6">Editar publicación</h1>
 
       {error && (
         <div className="mb-4 p-3 rounded-lg bg-error-500/10 text-error-500 text-sm">
@@ -137,12 +137,12 @@ export default function EditListingPage() {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <section>
-          <h2 className="text-sm font-semibold text-warm-700 mb-2">Imagenes</h2>
+          <h2 className="text-sm font-semibold text-warm-700 mb-2">Imágenes</h2>
           <ImageUploader images={images} onChange={setImages} />
         </section>
 
         <Input
-          label="Titulo"
+          label="Título"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
           placeholder="Ej: iPhone 14 Pro Max 256GB"
@@ -151,7 +151,7 @@ export default function EditListingPage() {
         />
 
         <div>
-          <label className="block text-sm font-medium text-warm-700 mb-1.5">Descripcion</label>
+          <label className="block text-sm font-medium text-warm-700 mb-1.5">Descripción</label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
@@ -163,14 +163,14 @@ export default function EditListingPage() {
 
         <div>
           <label className="block text-sm font-medium text-warm-700 mb-1.5">
-            Categoria <span className="text-error-500">*</span>
+            Categoría <span className="text-error-500">*</span>
           </label>
           <select
             value={categoryId}
             onChange={(e) => setCategoryId(e.target.value ? Number(e.target.value) : '')}
             className="w-full px-4 py-2.5 rounded-lg border border-warm-300 focus:border-papaya-500 focus:ring-2 focus:ring-papaya-500/30 focus:outline-none transition-colors bg-white"
           >
-            <option value="">Selecciona una categoria</option>
+            <option value="">Selecciona una categoría</option>
             {categories.map((cat) =>
               cat.children && cat.children.length > 0 ? (
                 <optgroup key={cat.id} label={cat.name}>
@@ -187,7 +187,7 @@ export default function EditListingPage() {
 
         <div>
           <label className="block text-sm font-medium text-warm-700 mb-2">
-            Condicion <span className="text-error-500">*</span>
+            Condición <span className="text-error-500">*</span>
           </label>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {Object.entries(CONDITION_LABELS).map(([key, label]) => (
@@ -231,7 +231,7 @@ export default function EditListingPage() {
         </div>
 
         <Input
-          label="Ubicacion"
+          label="Ubicación"
           value={locationName}
           onChange={(e) => setLocationName(e.target.value)}
           placeholder="Ej: Santiago, RM"

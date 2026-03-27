@@ -13,6 +13,7 @@ import ListingDetailPage from './pages/listings/ListingDetailPage'
 import EditListingPage from './pages/listings/EditListingPage'
 import MyListingsPage from './pages/listings/MyListingsPage'
 import SearchResultsPage from './pages/search/SearchResultsPage'
+import NotFoundPage from './pages/NotFoundPage'
 import ProtectedRoute from './components/common/ProtectedRoute'
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LandingPage />} />
+          <Route path="/" element={<><Header /><LandingPage /></>} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
@@ -32,6 +33,7 @@ function App() {
           <Route path="/my-listings" element={<ProtectedRoute><Header /><MyListingsPage /></ProtectedRoute>} />
           <Route path="/users/:id" element={<><Header /><ProfilePage /></>} />
           <Route path="/settings" element={<ProtectedRoute><Header /><SettingsPage /></ProtectedRoute>} />
+          <Route path="*" element={<><Header /><NotFoundPage /></>} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
