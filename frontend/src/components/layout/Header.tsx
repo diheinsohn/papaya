@@ -47,6 +47,11 @@ export default function Header() {
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-3">
+            {isAuthenticated && (
+              <Link to="/create-listing">
+                <Button size="sm">Publicar</Button>
+              </Link>
+            )}
             {isAuthenticated ? (
               <div className="relative" ref={dropdownRef}>
                 <button
@@ -78,12 +83,13 @@ export default function Header() {
                     >
                       Mi perfil
                     </Link>
-                    <button
-                      disabled
-                      className="block w-full text-left px-4 py-2 text-sm text-warm-400 cursor-not-allowed"
+                    <Link
+                      to="/my-listings"
+                      onClick={() => setDropdownOpen(false)}
+                      className="block px-4 py-2 text-sm text-warm-700 hover:bg-warm-50"
                     >
                       Mis articulos
-                    </button>
+                    </Link>
                     <Link
                       to="/settings"
                       onClick={() => setDropdownOpen(false)}
@@ -170,12 +176,20 @@ export default function Header() {
                 >
                   Mi perfil
                 </Link>
-                <button
-                  disabled
-                  className="block w-full text-left py-2 text-warm-400 cursor-not-allowed"
+                <Link
+                  to="/create-listing"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 text-papaya-500 font-medium"
+                >
+                  Publicar
+                </Link>
+                <Link
+                  to="/my-listings"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 text-warm-700"
                 >
                   Mis articulos
-                </button>
+                </Link>
                 <Link
                   to="/settings"
                   onClick={() => setMobileMenuOpen(false)}

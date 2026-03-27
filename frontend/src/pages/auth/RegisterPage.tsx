@@ -33,7 +33,7 @@ export default function RegisterPage() {
 
     try {
       await register(email, password, username)
-      navigate('/settings', { replace: true })
+      navigate('/home', { replace: true })
     } catch (err) {
       if (err instanceof AxiosError && err.response?.data?.message) {
         setError(err.response.data.message)

@@ -29,6 +29,16 @@ def create_app(config_name=None):
     # Register error handlers
     register_error_handlers(app)
 
+    # Serve uploaded files in development
+    if app.config.get('DEBUG'):
+        from flask import send_from_directory
+        upload_dir = os.path.abspath(app.config.get('UPLOAD_DIR', 'uploads'))
+        os.makedirs(upload_dir, exist_ok=True)
+
+        @app.route('/uploads/<path:filename>')
+        def serve_upload(filename):
+            return send_from_directory(upload_dir, filename)
+
     return app
 
 

@@ -7,6 +7,11 @@ import RegisterPage from './pages/auth/RegisterPage'
 import ForgotPasswordPage from './pages/auth/ForgotPasswordPage'
 import ProfilePage from './pages/profile/ProfilePage'
 import SettingsPage from './pages/profile/SettingsPage'
+import HomePage from './pages/home/HomePage'
+import CreateListingPage from './pages/listings/CreateListingPage'
+import ListingDetailPage from './pages/listings/ListingDetailPage'
+import EditListingPage from './pages/listings/EditListingPage'
+import MyListingsPage from './pages/listings/MyListingsPage'
 import ProtectedRoute from './components/common/ProtectedRoute'
 
 function App() {
@@ -18,6 +23,11 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+          <Route path="/home" element={<><Header /><HomePage /></>} />
+          <Route path="/listings/:id" element={<><Header /><ListingDetailPage /></>} />
+          <Route path="/create-listing" element={<ProtectedRoute><Header /><CreateListingPage /></ProtectedRoute>} />
+          <Route path="/listings/:id/edit" element={<ProtectedRoute><Header /><EditListingPage /></ProtectedRoute>} />
+          <Route path="/my-listings" element={<ProtectedRoute><Header /><MyListingsPage /></ProtectedRoute>} />
           <Route path="/users/:id" element={<><Header /><ProfilePage /></>} />
           <Route path="/settings" element={<ProtectedRoute><Header /><SettingsPage /></ProtectedRoute>} />
         </Routes>

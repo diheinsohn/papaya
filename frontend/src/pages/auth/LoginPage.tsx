@@ -15,7 +15,7 @@ export default function LoginPage() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
 
-  const returnTo = (location.state as { from?: string })?.from || '/settings'
+  const returnTo = (location.state as { from?: string })?.from || '/home'
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
